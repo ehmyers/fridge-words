@@ -1,0 +1,13 @@
+body {
+	background: url("images/fridge_pattern.png");
+	margin: 0px;
+	padding: 0px;
+	font-family: Helvetica, Ariel, sans-serif;
+	color: #222222;
+	min-width: 600px;
+	min-height: 500px;
+}
+
+.magnets {
+	background-color: white;
+}
