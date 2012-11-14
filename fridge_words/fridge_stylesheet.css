@@ -3,12 +3,11 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
-	color: #222222;
+	color: #999999;
 	min-width: 600px;
 	min-height: 500px;
 }
 
 .magnets {
 	background-color: white;
-	width: 10px;
 }
