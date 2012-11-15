@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	var numWords = 15;
 	var numDivs = 15;
+	var numBackgrounds = 5;
 	var words = [
 		{"word": "abhor", "pos": "verb"},
 		{"word": "brains", "pos": "noun"},
@@ -56,4 +57,28 @@ $(document).ready(function() {
 	}
 	// end drag and drop code
 
+	// swapping background code
+	thebackground();	
+	$('div.background').fadeIn(500); // works for all the browsers other than IE
+	$('div.background img').fadeIn(500); // IE tweak
+
 });
+
+function thebackground() {
+	$('div.background img').css({opacity: 0.0});
+	$('div.background img:first').css({opacity: 1.0});
+	//var randTime = Math.floor(Math.random()*numBackgrounds) + 1;
+	setInterval('change()',4000);
+}
+
+function change() {
+	var current = ($('div.background img.show')? $('div.background img.show') : $('div.background img:first'));
+	if ( current.length == 0 ) current = $('div.background img:first');
+	var next = ((current.next().length) ? ((current.next().hasClass('show')) ? $('div.background img:first') :current.next()) : $('div.background img:first'));
+	next.css({opacity: 0.0})
+	.addClass('show')
+	.animate({opacity: 1.0}, 500);
+	current.animate({opacity: 0.0}, 500)
+	.removeClass('show');
+};
+// swapping backround end code

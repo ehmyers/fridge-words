@@ -1,5 +1,7 @@
+/**************** general *******************/
+
 body {
-	background: url("images/fridge_pattern.png");
+	background-repeat: repeat;
 	margin: 0px;
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
@@ -10,4 +12,24 @@ body {
 
 .magnets {
 	background-color: white;
+}
+
+/********** swapping backgrounds **************/
+
+div.background {
+	position:absolute;
+	left:0px;
+	top:0px;
+	z-index:-1;
+}
+
+div.background img {
+	position:fixed;
+	list-style: none;
+	left:0px;
+	top:0px;
+}
+
+div.background ul li.show {
+	z-index:500
 }
