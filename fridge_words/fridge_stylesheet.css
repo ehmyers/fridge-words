@@ -5,13 +5,15 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
+	font-size: 4em/6em;
 	color: #999999;
 	min-width: 600px;
 	min-height: 500px;
 }
 
-.magnets {
+.magnet {
 	background-color: white;
+	padding: 5px;
 }
 
 /********** swapping backgrounds **************/

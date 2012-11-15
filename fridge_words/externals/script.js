@@ -1,28 +1,63 @@
 $(document).ready(function() {
-	var numWords = 15;
+	var numWords = 46;
 	var numDivs = 15;
 	var numBackgrounds = 5;
 	var words = [
+		{"word": "a", "pos": "article"},
 		{"word": "abhor", "pos": "verb"},
+		{"word": "adapt", "pos": "verb"},
+		{"word": "an", "pos": "article"},
+		{"word": "bird", "pos": "noun"},
+		{"word": "bird", "pos": "noun"},
 		{"word": "brains", "pos": "noun"},
-		{"word": "rotting", "pos": "adjective"},
 		{"word": "chicken", "pos": "noun"},
-		{"word": "walk", "pos": "verb"},
-		{"word": "yellow", "pos": "adjective"},
-		{"word": "potato", "pos": "noun"},
-		{"word": "zombie", "pos": "noun"},
-		{"word": "hair", "pos": "noun"},
+		{"word": "crash", "pos": "verb"},
+		{"word": "damage", "pos": "noun"},
+		{"word": "damaged", "pos": "adjective"},
 		{"word": "despise", "pos": "verb"},
+		{"word": "distinct", "pos": "adjective"},
+		{"word": "effect", "pos": "noun"},
+		{"word": "emphasize", "pos": "verb"},
+		{"word": "fuse", "pos": "verb"},
+		{"word": "growth", "pos": "noun"},
+		{"word": "hair", "pos": "noun"},
+		{"word": "ignorant", "pos": "adjective"},
 		{"word": "loathe", "pos": "verb"},
+		{"word": "ly", "pos": "suffix"},
+		{"word": "oath", "pos": "noun"},
+		{"word": "offer", "pos": "verb"},
 		{"word": "omnipresent", "pos": "adjective"},
-		{"word": "search", "pos": "verb"},
 		{"word": "peeling", "pos": "adjective"},
-		{"word": "yell", "pos": "verb"}
+		{"word": "potato", "pos": "noun"},
+		{"word": "recreate", "pos": "verb"},
+		{"word": "reduce", "pos": "verb"},
+		{"word": "reward", "pos": "noun"},
+		{"word": "rhythm", "pos": "noun"},
+		{"word": "rotting", "pos": "adjective"},
+		{"word": "salty", "pos": "adjective"},
+		{"word": "sample", "pos": "noun"},
+		{"word": "search", "pos": "verb"},
+		{"word": "snobbish", "pos": "adjective"},
+		{"word": "spotted", "pos": "adjective"},
+		{"word": "substitute", "pos": "verb"},
+		{"word": "swift", "pos": "adjective"},
+		{"word": "termite", "pos": "verb"},
+		{"word": "the", "pos": "article"},
+		{"word": "upbeat", "pos": "adjective"},
+		{"word": "verse", "pos": "noun"},
+		{"word": "walk", "pos": "verb"},
+		{"word": "yell", "pos": "verb"},
+		{"word": "yellow", "pos": "adjective"},
+		{"word": "zombie", "pos": "noun"}
 	]
 
 	for (var i = 0; i < numDivs; i++) {
 		var randIndex = Math.floor(Math.random()*numWords);
-		$(".testdiv").append("<div class='magnet' data-index='" + randIndex + "'>" + words[randIndex].word + "</div>");
+		var word = words[randIndex].word;
+		$(".testdiv").append("<div class='magnet' data-index='" + randIndex + "'>" + word + "</div>");
+		var divLength = word.length;
+		console.log("This is the divLength of " + word + " " + divLength);
+		//$(".testdiv").style.width = divLength;
 	}
 
 	var changeWordInterval = window.setInterval(function() {
