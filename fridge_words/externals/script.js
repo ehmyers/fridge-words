@@ -3,58 +3,58 @@ $(document).ready(function() {
 	var numDivs = 15;
 	var numBackgrounds = 5;
 	var words = [
-		{"word": "a", "pos": "article"},
-		{"word": "abhor", "pos": "verb"},
-		{"word": "adapt", "pos": "verb"},
-		{"word": "an", "pos": "article"},
-		{"word": "bird", "pos": "noun"},
-		{"word": "bird", "pos": "noun"},
-		{"word": "brains", "pos": "noun"},
-		{"word": "chicken", "pos": "noun"},
-		{"word": "crash", "pos": "verb"},
-		{"word": "damage", "pos": "noun"},
-		{"word": "damaged", "pos": "adjective"},
-		{"word": "despise", "pos": "verb"},
-		{"word": "distinct", "pos": "adjective"},
-		{"word": "effect", "pos": "noun"},
-		{"word": "emphasize", "pos": "verb"},
-		{"word": "fuse", "pos": "verb"},
-		{"word": "growth", "pos": "noun"},
-		{"word": "hair", "pos": "noun"},
-		{"word": "ignorant", "pos": "adjective"},
-		{"word": "loathe", "pos": "verb"},
-		{"word": "ly", "pos": "suffix"},
-		{"word": "oath", "pos": "noun"},
-		{"word": "offer", "pos": "verb"},
-		{"word": "omnipresent", "pos": "adjective"},
-		{"word": "peeling", "pos": "adjective"},
-		{"word": "potato", "pos": "noun"},
-		{"word": "recreate", "pos": "verb"},
-		{"word": "reduce", "pos": "verb"},
-		{"word": "reward", "pos": "noun"},
-		{"word": "rhythm", "pos": "noun"},
-		{"word": "rotting", "pos": "adjective"},
-		{"word": "salty", "pos": "adjective"},
-		{"word": "sample", "pos": "noun"},
-		{"word": "search", "pos": "verb"},
-		{"word": "snobbish", "pos": "adjective"},
-		{"word": "spotted", "pos": "adjective"},
-		{"word": "substitute", "pos": "verb"},
-		{"word": "swift", "pos": "adjective"},
-		{"word": "termite", "pos": "verb"},
-		{"word": "the", "pos": "article"},
-		{"word": "upbeat", "pos": "adjective"},
-		{"word": "verse", "pos": "noun"},
-		{"word": "walk", "pos": "verb"},
-		{"word": "yell", "pos": "verb"},
-		{"word": "yellow", "pos": "adjective"},
-		{"word": "zombie", "pos": "noun"}
+	{"word": "a", "pos": "article"},
+	{"word": "abhor", "pos": "verb"},
+	{"word": "adapt", "pos": "verb"},
+	{"word": "an", "pos": "article"},
+	{"word": "bird", "pos": "noun"},
+	{"word": "bird", "pos": "noun"},
+	{"word": "brains", "pos": "noun"},
+	{"word": "chicken", "pos": "noun"},
+	{"word": "crash", "pos": "verb"},
+	{"word": "damage", "pos": "noun"},
+	{"word": "damaged", "pos": "adjective"},
+	{"word": "despise", "pos": "verb"},
+	{"word": "distinct", "pos": "adjective"},
+	{"word": "effect", "pos": "noun"},
+	{"word": "emphasize", "pos": "verb"},
+	{"word": "fuse", "pos": "verb"},
+	{"word": "growth", "pos": "noun"},
+	{"word": "hair", "pos": "noun"},
+	{"word": "ignorant", "pos": "adjective"},
+	{"word": "loathe", "pos": "verb"},
+	{"word": "ly", "pos": "suffix"},
+	{"word": "oath", "pos": "noun"},
+	{"word": "offer", "pos": "verb"},
+	{"word": "omnipresent", "pos": "adjective"},
+	{"word": "peeling", "pos": "adjective"},
+	{"word": "potato", "pos": "noun"},
+	{"word": "recreate", "pos": "verb"},
+	{"word": "reduce", "pos": "verb"},
+	{"word": "reward", "pos": "noun"},
+	{"word": "rhythm", "pos": "noun"},
+	{"word": "rotting", "pos": "adjective"},
+	{"word": "salty", "pos": "adjective"},
+	{"word": "sample", "pos": "noun"},
+	{"word": "search", "pos": "verb"},
+	{"word": "snobbish", "pos": "adjective"},
+	{"word": "spotted", "pos": "adjective"},
+	{"word": "substitute", "pos": "verb"},
+	{"word": "swift", "pos": "adjective"},
+	{"word": "termite", "pos": "verb"},
+	{"word": "the", "pos": "article"},
+	{"word": "upbeat", "pos": "adjective"},
+	{"word": "verse", "pos": "noun"},
+	{"word": "walk", "pos": "verb"},
+	{"word": "yell", "pos": "verb"},
+	{"word": "yellow", "pos": "adjective"},
+	{"word": "zombie", "pos": "noun"}
 	]
 
 	for (var i = 0; i < numDivs; i++) {
 		var randIndex = Math.floor(Math.random()*numWords);
 		var word = words[randIndex].word;
-		$(".testdiv").append("<div class='magnet' data-index='" + randIndex + "'>" + word + "</div>");
+		$(".testdiv").append("<div class='drag' data-index='" + randIndex + "'>" + word + "</div>");
 		var divLength = word.length;
 		console.log("This is the divLength of " + word + " " + divLength);
 		//$(".testdiv").style.width = divLength;
@@ -69,33 +69,62 @@ $(document).ready(function() {
 
 	}, 1000);
 
-	// drag and drop code
-	function allowDrop(ev) {
-		ev.preventDefault();drag1
+	/***********************************************
+* Drag and Drop Script: © Dynamic Drive (http://www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit http://www.dynamicdrive.com/ for this script and 100s more.
+***********************************************/
+
+var dragobject={
+	z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
+	initialize:function(){
+		document.onmousedown=this.drag
+		document.onmouseup=function(){this.dragapproved=0}
+	},
+	drag:function(e){
+		var evtobj=window.event? window.event : e
+		this.targetobj=window.event? event.srcElement : e.target
+		if (this.targetobj.className=="drag"){
+			this.dragapproved=1
+			if (isNaN(parseInt(this.targetobj.style.left))){this.targetobj.style.left=0}
+				if (isNaN(parseInt(this.targetobj.style.top))){this.targetobj.style.top=0}
+					this.offsetx=parseInt(this.targetobj.style.left)
+				this.offsety=parseInt(this.targetobj.style.top)
+				this.x=evtobj.clientX
+				this.y=evtobj.clientY
+				if (evtobj.preventDefault)
+					evtobj.preventDefault()
+				document.onmousemove=dragobject.moveit
+			}
+		},
+		moveit:function(e){
+			var evtobj=window.event? window.event : e
+			if (this.dragapproved==1){
+				this.targetobj.style.left=this.offsetx+evtobj.clientX-this.x+"px"
+				this.targetobj.style.top=this.offsety+evtobj.clientY-this.y+"px"
+				return false
+			}
+		}
 	}
 
-	function drag(ev) {
-		ev.dataTransfer.setData("Text",ev.target.id);
-	}
-
-	function drop(ev) {
-		ev.preventDefault();
-		var data=ev.dataTransfer.getData("Text");
-		ev.target.appendChild(document.getElementById(data));
-	}
-
-	var currentWord = ("hello");
-	// setting the width of the div based on text within
-	function size() {
-		var divLength = currentWord.length;
-		console.log(divLength);
-	}
+	dragobject.initialize()
 	// end drag and drop code
 
 	// swapping background code
 	thebackground();	
 	$('div.background').fadeIn(500); // works for all the browsers other than IE
 	$('div.background img').fadeIn(500); // IE tweak
+
+	// unselectable text
+	function disableSelection(target){
+		if (typeof target.onselectstart!="undefined") //IE route
+			target.onselectstart=function(){return false}
+		else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
+			target.style.MozUserSelect="none"
+		else //All other route (ie: Opera)
+			target.onmousedown=function(){return false}
+		target.style.cursor = "default"
+	}
 
 });
 
@@ -117,3 +146,5 @@ function change() {
 	.removeClass('show');
 };
 // swapping backround end code
+
+disableSelection(document.body)

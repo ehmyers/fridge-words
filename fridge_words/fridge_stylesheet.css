@@ -11,9 +11,13 @@ body {
 	min-height: 500px;
 }
 
+.drag{
+	position:relative;
+	cursor:hand;
+	z-index: 100;
+}
+
 .magnet {
-	background-color: white;
-	padding: 5px;
 }
 
 /********** swapping backgrounds **************/
