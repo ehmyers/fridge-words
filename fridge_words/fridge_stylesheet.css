@@ -1,14 +1,16 @@
 /**************** general *******************/
 
 body {
+	background: url("images/pattern_02.png");
 	background-repeat: repeat;
 	margin: 0px;
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
 	font-size: 4em/6em;
-	color: #999999;
+	color: #ffffff;
 	min-width: 600px;
 	min-height: 500px;
+	cursor: default;
 }
 
 .drag{
