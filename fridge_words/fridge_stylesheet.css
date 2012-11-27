@@ -13,10 +13,14 @@ body {
 	cursor: default;
 }
 
-.drag{
+.drag {
 	position:relative;
 	cursor:hand;
 	z-index: 100;
+}
+
+.draggable {
+	position: absolute;
 }
 
 .magnet {

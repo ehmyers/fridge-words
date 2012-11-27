@@ -54,9 +54,9 @@ $(document).ready(function() {
 	for (var i = 0; i < numDivs; i++) {
 		var randIndex = Math.floor(Math.random()*numWords);
 		var word = words[randIndex].word;
-		$(".testdiv").append("<div class='drag' data-index='" + randIndex + "'>" + word + "</div>");
+		$(".testdiv").append("<div class='draggable magnet' data-index='" + randIndex + "'>" + word + "</div>");
 		var divLength = word.length;
-		console.log("This is the divLength of " + word + " " + divLength);
+		// console.log("This is the divLength of " + word + " " + divLength);
 		//$(".testdiv").style.width = divLength;
 	}
 
@@ -69,12 +69,41 @@ $(document).ready(function() {
 
 	}, 1000);
 
+	// woop dragging stuff.
+	$(".draggable").mousedown(function(){
+		$(this).addClass("dragging");
+		console.log("dragging engaged!");
+		console.log($(".dragging"));
+	});
+
+	$(".draggable").mouseup(function(){
+		// $(this).removeClass("dragging");
+		console.log("dragging DISengaged!");
+	});
+
+	$(".dragging").mousemove(function(){
+		$(this).offset({top:100, left:100});
+		console.log("moving");
+	});
+
+	var draggables = document.getElementsByClassName("draggable");
+	for (var i = 0; i < draggables.length; i++) {
+		disableSelection(draggables[i]);
+	}
+
+
+
+
+
+
+
+
 	/***********************************************
 * Drag and Drop Script: © Dynamic Drive (http://www.dynamicdrive.com)
 * This notice MUST stay intact for legal use
 * Visit http://www.dynamicdrive.com/ for this script and 100s more.
 ***********************************************/
-
+/*
 var dragobject={
 	z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
 	initialize:function(){
@@ -107,44 +136,44 @@ var dragobject={
 		}
 	}
 
-	dragobject.initialize()
+	dragobject.initialize()*/
 	// end drag and drop code
-
-	// swapping background code
-	thebackground();	
-	$('div.background').fadeIn(500); // works for all the browsers other than IE
-	$('div.background img').fadeIn(500); // IE tweak
-
-	// unselectable text
-	function disableSelection(target){
-		if (typeof target.onselectstart!="undefined") //IE route
-			target.onselectstart=function(){return false}
-		else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
-			target.style.MozUserSelect="none"
-		else //All other route (ie: Opera)
-			target.onmousedown=function(){return false}
-		target.style.cursor = "default"
-	}
 
 });
 
-function thebackground() {
-	$('div.background img').css({opacity: 0.0});
-	$('div.background img:first').css({opacity: 1.0});
-	//var randTime = Math.floor(Math.random()*numBackgrounds) + 1;
-	setInterval('change()',4000);
+// // swapping background code
+// thebackground();	
+// $('div.background').fadeIn(500); // works for all the browsers other than IE
+// $('div.background img').fadeIn(500); // IE tweak
+
+// unselectable text
+function disableSelection(target){
+	if (typeof target.onselectstart!="undefined") //IE route
+		target.onselectstart=function(){return false}
+	else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
+		target.style.MozUserSelect="none"
+	else //All other route (ie: Opera)
+		target.onmousedown=function(){return false}
+	target.style.cursor = "default"
 }
 
-function change() {
-	var current = ($('div.background img.show')? $('div.background img.show') : $('div.background img:first'));
-	if ( current.length == 0 ) current = $('div.background img:first');
-	var next = ((current.next().length) ? ((current.next().hasClass('show')) ? $('div.background img:first') :current.next()) : $('div.background img:first'));
-	next.css({opacity: 0.0})
-	.addClass('show')
-	.animate({opacity: 1.0}, 500);
-	current.animate({opacity: 0.0}, 500)
-	.removeClass('show');
-};
+// function thebackground() {
+// $('div.background img').css({opacity: 0.0});
+// $('div.background img:first').css({opacity: 1.0});
+// //var randTime = Math.floor(Math.random()*numBackgrounds) + 1;
+// setInterval('change()',4000);
+// }
+
+// function change() {
+// 	var current = ($('div.background img.show')? $('div.background img.show') : $('div.background img:first'));
+// 	if ( current.length == 0 ) current = $('div.background img:first');
+// 	var next = ((current.next().length) ? ((current.next().hasClass('show')) ? $('div.background img:first') :current.next()) : $('div.background img:first'));
+// 	next.css({opacity: 0.0})
+// 	.addClass('show')
+// 	.animate({opacity: 1.0}, 500);
+// 	current.animate({opacity: 0.0}, 500)
+// 	.removeClass('show');
+// };
 // swapping backround end code
 
-disableSelection(document.body)
+// disableSelection(document.body)
