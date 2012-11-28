@@ -51,65 +51,53 @@ $(document).ready(function() {
 	{"word": "zombie", "pos": "noun"}
 	]
 
+	// var lengthOfArray = "words.json".length;
+	// console.log(lengthOfArray);
+
 	for (var i = 0; i < numDivs; i++) {
 		var randIndex = Math.floor(Math.random()*numWords);
 		var word = words[randIndex].word;
-		$(".testdiv").append("<div class='draggable magnet' data-index='" + randIndex + "'>" + word + "</div>");
-		var divLength = word.length;
-		// console.log("This is the divLength of " + word + " " + divLength);
-		//$(".testdiv").style.width = divLength;
+		var newMagnet = $("<div class='drag' id='magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
+		var divLength = newMagnet.children("span").width();
+		var ASDF = newMagnet.children("span");
+
+		console.log(ASDF.width());
+		newMagnet.width(newMagnet.width());
+
+		var browserWidth = $(window).width();
+		var browserHeight = $(window).height();
+
+		var randomX = Math.floor(Math.random()*browserHeight);
+		var randomY = Math.floor(Math.random()*browserWidth);
+
+		console.log(randomX);
+		console.log(randomY);
+
+		newMagnet.offset({"top": randomX, "left": randomY});
+		$(".testdiv").append(newMagnet);
 	}
 
 	var changeWordInterval = window.setInterval(function() {
 		var randIndex = Math.floor(Math.random()*numDivs) + 1;
 		var newWordIndex = Math.floor(Math.random()*numWords);
 		var newWord = words[newWordIndex].word;
-		$(".testdiv").children(":nth-child(" + randIndex + ")").html(newWord);
+		$(".testdiv").children(":nth-child(" + randIndex + ")").width(divLength);
+		$(".testdiv").children(":nth-child(" + randIndex + ")").html("<span>" + newWord + "</span>");
 		
-
 	}, 1000);
-
-	// woop dragging stuff.
-	$(".draggable").mousedown(function(){
-		$(this).addClass("dragging");
-		console.log("dragging engaged!");
-		console.log($(".dragging"));
-	});
-
-	$(".draggable").mouseup(function(){
-		// $(this).removeClass("dragging");
-		console.log("dragging DISengaged!");
-	});
-
-	$(".dragging").mousemove(function(){
-		$(this).offset({top:100, left:100});
-		console.log("moving");
-	});
-
-	var draggables = document.getElementsByClassName("draggable");
-	for (var i = 0; i < draggables.length; i++) {
-		disableSelection(draggables[i]);
-	}
-
-
-
-
-
-
-
 
 	/***********************************************
 * Drag and Drop Script: © Dynamic Drive (http://www.dynamicdrive.com)
 * This notice MUST stay intact for legal use
 * Visit http://www.dynamicdrive.com/ for this script and 100s more.
 ***********************************************/
-/*
 var dragobject={
 	z: 0, x: 0, y: 0, offsetx : null, offsety : null, targetobj : null, dragapproved : 0,
 	initialize:function(){
 		document.onmousedown=this.drag
 		document.onmouseup=function(){this.dragapproved=0}
 	},
+
 	drag:function(e){
 		var evtobj=window.event? window.event : e
 		this.targetobj=window.event? event.srcElement : e.target
@@ -126,6 +114,7 @@ var dragobject={
 				document.onmousemove=dragobject.moveit
 			}
 		},
+
 		moveit:function(e){
 			var evtobj=window.event? window.event : e
 			if (this.dragapproved==1){
@@ -136,15 +125,10 @@ var dragobject={
 		}
 	}
 
-	dragobject.initialize()*/
+	dragobject.initialize()
 	// end drag and drop code
 
 });
-
-// // swapping background code
-// thebackground();	
-// $('div.background').fadeIn(500); // works for all the browsers other than IE
-// $('div.background img').fadeIn(500); // IE tweak
 
 // unselectable text
 function disableSelection(target){
@@ -156,6 +140,32 @@ function disableSelection(target){
 		target.onmousedown=function(){return false}
 	target.style.cursor = "default"
 }
+
+/*	// woop dragging stuff.
+	$(".draggable").mousedown(function(){
+		$(this).addClass("dragging");
+		console.log("dragging engaged!");
+	});
+
+	$(".draggable").mouseup(function(){
+		$(this).removeClass("dragging");
+		console.log("dragging DISengaged!");
+	});
+
+	$(".dragging").mousemove(function(){
+		$(this).offset({top:100, left:100});
+		console.log("moving");
+	});
+
+	var draggables = document.getElementsByClassName("draggable");
+	for (var i = 0; i < draggables.length; i++) {
+		disableSelection(draggables[i]);
+	}*/
+
+// // swapping background code
+// thebackground();	
+// $('div.background').fadeIn(500); // works for all the browsers other than IE
+// $('div.background img').fadeIn(500); // IE tweak
 
 // function thebackground() {
 // $('div.background img').css({opacity: 0.0});

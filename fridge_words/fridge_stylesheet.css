@@ -7,15 +7,15 @@ body {
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
 	font-size: 4em/6em;
-	color: #ffffff;
+	color: #000000;
 	min-width: 600px;
 	min-height: 500px;
 	cursor: default;
+	overflow: none;
 }
 
 .drag {
 	position:relative;
-	cursor:hand;
 	z-index: 100;
 }
 
@@ -23,7 +23,11 @@ body {
 	position: absolute;
 }
 
-.magnet {
+#magnet {
+	background: white;
+	padding: 5px;
+	box-shadow: 2px 2px 3px #888888;
+	width: 70px; /* temporary */
 }
 
 /********** swapping backgrounds **************/
