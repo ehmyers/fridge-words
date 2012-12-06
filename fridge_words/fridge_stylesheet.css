@@ -12,15 +12,24 @@ body {
 	min-height: 500px;
 	cursor: default;
 	overflow: none;
+	/* making text unselectable */
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 
 .drag {
 	position:relative;
 	z-index: 100;
+	cursor: move;
 }
 
 .draggable {
 	position: absolute;
+}
+
+h1 {
+	padding-left: 10px;
 }
 
 #magnet {

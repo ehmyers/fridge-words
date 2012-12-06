@@ -1,4 +1,4 @@
-{
+{"words": [
 	{"word": "a", "pos": "article"},
 	{"word": "abhor", "pos": "verb"},
 	{"word": "adapt", "pos": "verb"},
@@ -44,5 +44,5 @@
 	{"word": "walk", "pos": "verb"},
 	{"word": "yell", "pos": "verb"},
 	{"word": "yellow", "pos": "adjective"},
-	{"word": "zombie", "pos": "noun"},
-}
+	{"word": "zombie", "pos": "noun"}
+]}
