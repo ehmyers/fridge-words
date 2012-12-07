@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var numDivs = 15;
-	
+
 	var words = [];
 	$.getJSON("externals/words.json", function(data) {
 		words = data.words;
@@ -25,27 +25,29 @@ $(document).ready(function() {
 			newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
 		}
 
-		// on click, making each magnet on top of all the others
-		$(".magnet").css("z-index", "0");
-		$(".magnet").click(function() {
-			$(this).css("z-index", "1");
-		});
-
-		// adding/removing classes on mouseup/mousedown
-		$(".magnet").mouseup(function() {
+		// adding/removing classes on mousedown/mouseup
+		// also, making the clicked magnet come to the top
+		$(".magnet").mousedown(function() {
 			$(this).addClass("dragging");
+			$(this).css("z-index", "1");
 			console.log("dragging engaged!");
 		});
 
-		$(".magnet").mousedown(function() {
+		$(".magnet").mouseup(function() {
 			$(this).removeClass("dragging");
+			$(this).css("z-index", "0");
 			console.log("dragging DISengaged!");
 		});
 	});
 });
 
-// actually moving the magnets now
-$(".dragging").mousemove(function() {
-	$(this).offset({top:100, left:100});
+// actually moving the magnets
+var mouseX = e.pageX; 
+var mouseY = e.pageY;
+
+$(".dragging").mousemove(function(e) {
+	$(this).css({'top':mouseY,'left':mouseX});
+	console.log("mouseX is " + mouseX);
+	console.log("mouseY is " + mouseY);
 	console.log("moving");
 });

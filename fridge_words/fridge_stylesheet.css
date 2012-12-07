@@ -25,7 +25,7 @@ body {
 }
 
 .draggable {
-	position: absolute;
+	position: relative;
 }
 
 h1 {
