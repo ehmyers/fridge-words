@@ -23,22 +23,24 @@ $(document).ready(function() {
 			// randomizing the angle of the magnet
 			var randAngle = Math.floor(Math.random()*20-10);
 			newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
-
-			// on click, making each magnet on top of all the others
-			$(".magnet").css("z-index", "0");
-			$(".magnet").click(function() { $(this).css("z-index", "1"); });
-
-			// adding/removing classes on mouseup/mousedown
-			newMagnet.mouseup(function() {
-				$(this).addClass("dragging");
-				console.log("dragging engaged!");
-			});
-
-			newMagnet.mousedown(function() {
-				$(this).removeClass("dragging");
-				console.log("dragging DISengaged!");
-			});
 		}
+
+		// on click, making each magnet on top of all the others
+		$(".magnet").css("z-index", "0");
+		$(".magnet").click(function() {
+			$(this).css("z-index", "1");
+		});
+
+		// adding/removing classes on mouseup/mousedown
+		$(".magnet").mouseup(function() {
+			$(this).addClass("dragging");
+			console.log("dragging engaged!");
+		});
+
+		$(".magnet").mousedown(function() {
+			$(this).removeClass("dragging");
+			console.log("dragging DISengaged!");
+		});
 	});
 });
 
