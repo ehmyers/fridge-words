@@ -12,20 +12,16 @@ body {
 	min-height: 500px;
 	cursor: default;
 	overflow: hidden;
+}
+
+.drag {
+	position: absolute;
+	z-index: 100;
+	cursor: move;
 	/* making text unselectable */
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
-}
-
-.drag {
-	position:relative;
-	z-index: 100;
-	cursor: move;
-}
-
-.draggable {
-	position: relative;
 }
 
 h1 {

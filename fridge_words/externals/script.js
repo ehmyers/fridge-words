@@ -15,39 +15,33 @@ $(document).ready(function() {
 			// randomizing the placement of the magnets
 			var browserWidth = $(window).width();
 			var browserHeight = $(window).height();
-			var randomX = Math.floor(Math.random()*browserHeight/6);
-			var randomY = Math.floor(Math.random()*browserWidth/1.25);
+			var randomX = Math.floor(Math.random()*(browserHeight-200) + 100);
+			var randomY = Math.floor(Math.random()*(browserWidth-140) + 20);
 			newMagnet.offset({"top": randomX, "left": randomY});
 			$(".testdiv").append(newMagnet);
 
 			// randomizing the angle of the magnet
-			var randAngle = Math.floor(Math.random()*20-10);
+			var randAngle = Math.floor(Math.random()*10-5);
 			newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
 		}
 
 		// adding/removing classes on mousedown/mouseup
 		// also, making the clicked magnet come to the top
 		$(".magnet").mousedown(function() {
+			$(".magnet").removeClass("dragging");
 			$(this).addClass("dragging");
 			$(this).css("z-index", "1");
 			console.log("dragging engaged!");
 		});
 
-		$(".magnet").mouseup(function() {
-			$(this).removeClass("dragging");
-			$(this).css("z-index", "0");
+		$("*").mouseup(function() {
+			$(".magnet").removeClass("dragging");
 			console.log("dragging DISengaged!");
 		});
 	});
 });
 
 // actually moving the magnets
-var mouseX = e.pageX; 
-var mouseY = e.pageY;
-
-$(".dragging").mousemove(function(e) {
-	$(this).css({'top':mouseY,'left':mouseX});
-	console.log("mouseX is " + mouseX);
-	console.log("mouseY is " + mouseY);
-	console.log("moving");
+$("*").mousemove(function(e) {
+	$(".dragging").css({'top':e.pageY,'left':e.pageX});
 });
