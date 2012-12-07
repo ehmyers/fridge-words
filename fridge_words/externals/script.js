@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	var numDivs = 15;
-
+	
 	var words = [];
 	$.getJSON("externals/words.json", function(data) {
 		words = data.words;
