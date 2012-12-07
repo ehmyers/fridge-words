@@ -13,7 +13,7 @@ $(document).ready(function() {
 			console.log("The random index is " + randIndex);
 			var word = words[randIndex].word;
 			console.log(words[randIndex]);
-			var newMagnet = $("<div class='drag' id='magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
+			var newMagnet = $("<div class='drag magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
 			
 			// randomizing the placement of the magnets
 			var browserWidth = $(window).width();

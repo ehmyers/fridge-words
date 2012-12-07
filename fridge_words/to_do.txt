@@ -1,13 +1,9 @@
 - make the divs the length of the words
 
-- link json object array to js file
-
 - enable oulipo's constraint
 
 - add more words to dictionary
 
 - make each magnet's z-index on top when clicked
-
-- rotate and place magnets randomly on beginning
 
 - revisit criteria for project

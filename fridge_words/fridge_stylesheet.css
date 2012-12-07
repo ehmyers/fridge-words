@@ -32,11 +32,10 @@ h1 {
 	padding-left: 10px;
 }
 
-#magnet {
+.magnet span {
 	background: white;
 	padding: 5px;
 	box-shadow: 2px 2px 3px #888888;
-	width: 70px; /* temporary */
 }
 
 /********** swapping backgrounds **************/
