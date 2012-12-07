@@ -24,28 +24,26 @@ $(document).ready(function() {
 			var randAngle = Math.floor(Math.random()*20-10);
 			newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
 
+			// on click, making each magnet on top of all the others
+			$(".magnet").css("z-index", "0");
+			$(".magnet").click(function() { $(this).css("z-index", "1"); });
+
+			// adding/removing classes on mouseup/mousedown
+			newMagnet.mouseup(function() {
+				$(this).addClass("dragging");
+				console.log("dragging engaged!");
+			});
+
+			newMagnet.mousedown(function() {
+				$(this).removeClass("dragging");
+				console.log("dragging DISengaged!");
+			});
 		}
 	});
 });
 
-// woop dragging stuff.
-$(".drag").mousedown(function() {
-	$(this).addClass("drag");
-	console.log("dragging engaged!");
-});
-
-$(".drag").mouseup(function() {
-	$(this).removeClass("drag");
-	console.log("dragging DISengaged!");
-});
-
+// actually moving the magnets now
 $(".dragging").mousemove(function() {
 	$(this).offset({top:100, left:100});
 	console.log("moving");
 });
-
-
-
-
-
-

@@ -6,12 +6,12 @@ body {
 	margin: 0px;
 	padding: 0px;
 	font-family: Helvetica, Ariel, sans-serif;
-	font-size: 4em/6em;
+	font-size: 18px;
 	color: #000000;
 	min-width: 600px;
 	min-height: 500px;
 	cursor: default;
-	overflow: none;
+	overflow: hidden;
 	/* making text unselectable */
 	user-select: none;
 	-webkit-user-select: none;
