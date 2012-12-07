@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	var numWords = 46;
 	var numDivs = 15;
 
 	var words = [];
@@ -9,10 +8,8 @@ $(document).ready(function() {
 
 		// creating the individual magnets
 		for (var i = 0; i < numDivs; i++) {
-			var randIndex = Math.floor(Math.random()*numWords);
-			console.log("The random index is " + randIndex);
+			var randIndex = Math.floor(Math.random()*words.length);
 			var word = words[randIndex].word;
-			console.log(words[randIndex]);
 			var newMagnet = $("<div class='drag magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
 			
 			// randomizing the placement of the magnets
@@ -30,3 +27,25 @@ $(document).ready(function() {
 		}
 	});
 });
+
+// woop dragging stuff.
+$(".drag").mousedown(function() {
+	$(this).addClass("drag");
+	console.log("dragging engaged!");
+});
+
+$(".drag").mouseup(function() {
+	$(this).removeClass("drag");
+	console.log("dragging DISengaged!");
+});
+
+$(".dragging").mousemove(function() {
+	$(this).offset({top:100, left:100});
+	console.log("moving");
+});
+
+
+
+
+
+

@@ -1,9 +1,17 @@
-- make the divs the length of the words
+- rewrite drag class
 
 - enable oulipo's constraint
 
+- make each magnet's z-index on top when clicked
+
+- add border to positioning
+
 - add more words to dictionary
 
-- make each magnet's z-index on top when clicked
+- add emotional attachment to each word/
+	detect neg/pos emotion sentances/
+	change background based on that
+
+- make cross-browser compatible
 
 - revisit criteria for project
