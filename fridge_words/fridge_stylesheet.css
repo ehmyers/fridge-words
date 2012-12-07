@@ -16,7 +16,7 @@ body {
 
 .drag {
 	position: absolute;
-	z-index: 100;
+	z-index: 0;
 	cursor: move;
 	/* making text unselectable */
 	user-select: none;

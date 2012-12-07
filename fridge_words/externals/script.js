@@ -1,5 +1,7 @@
 $(document).ready(function() {
 	var numDivs = 15;
+	var highestIndex = 0;
+	var currentIndex = 0;
 
 	var words = [];
 	$.getJSON("externals/words.json", function(data) {
@@ -30,18 +32,28 @@ $(document).ready(function() {
 		$(".magnet").mousedown(function() {
 			$(".magnet").removeClass("dragging");
 			$(this).addClass("dragging");
-			$(this).css("z-index", "1");
-			console.log("dragging engaged!");
+			//console.log("dragging engaged!");
+
+			// updating z-index
+			var currentIndex = parseInt($(this).css("z-index"));
+			//console.log("This is the current index " + currentIndex);
+			if (highestIndex > currentIndex) {
+				currentIndex = highestIndex + 1;
+			}
+			$(this).css("z-index", currentIndex);
+			highestIndex++;
+			//console.log("This is the highest index " + highestIndex);
 		});
 
 		$("*").mouseup(function() {
 			$(".magnet").removeClass("dragging");
-			console.log("dragging DISengaged!");
+			//console.log("dragging DISengaged!");
 		});
 	});
 });
 
 // actually moving the magnets
 $("*").mousemove(function(e) {
+	console.log(e);
 	$(".dragging").css({'top':e.pageY,'left':e.pageX});
 });
