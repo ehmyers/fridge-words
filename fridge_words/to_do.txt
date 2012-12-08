@@ -1,8 +1,6 @@
 - fix where the magnet goes under mouse
 
-- fix stacking and z-index
-
-- enable oulipo's constraint
+- enable oulipo's constraint!
 
 - add more words to dictionary
 
@@ -11,5 +9,5 @@
 - revisit criteria for project
 
 - add emotional attachment to each word/
-	detect neg/pos emotion sentances/
+	detect neg/pos emotion sentences/
 	change background based on that
