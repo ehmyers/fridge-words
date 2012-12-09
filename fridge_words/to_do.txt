@@ -1,6 +1,6 @@
-- fix where the magnet goes under mouse
-
 - enable oulipo's constraint!
+
+- make n/d flicker randomly
 
 - add more words to dictionary
 
