@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var numDivs = 15;
+	var numDivs = 1;
 	var highestIndex = 0;
 	var currentIndex = 0;
 	window.relativeX = 0;
@@ -12,12 +12,35 @@ $(document).ready(function() {
 		//console.log("The length of data is " + data.words.length);
 
 		// oulipo's n+7 constraint, still working on
-		// setInterval(function() {
-		// 	var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
-		// 	var word = $(randMag).children().html();
-		// 	var wordpos = words[word].pos;
-		// 	console.log(wordpos);
-		// }, Math.random()*13000 + 2000);
+		setInterval(function() {
+			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
+			var randWord = $(randMag).children().html();
+			var oldWordIndex;
+			var randWordPos;
+			// finds the word within the json file
+			for (var i=0; i<words.length; i++) {
+				if (randWord == words[i].word) {
+					randWordPos = words[i].pos;
+					oldWordIndex = i;
+					break;
+				}
+			}
+			// searches all other pos for matches
+			var posCounter = 7;
+			var newWord;
+			for (var i=oldWordIndex; i<words.length; i++) {
+				if (randWordPos == words[i].pos) {
+					posCounter--;
+				}
+				if (posCounter == 0) {
+					newWord = words[i].word;
+					break;
+				}
+			}
+			// switches out randWord with newWord
+			$(randMag).html("<span>" + newWord + "</span>");
+			console.log(randWord + " -> " + newWord);
+		}, Math.random()*13000 + 2000);
 
 		// fri[d/n]ge words swap
 		setInterval(function() {

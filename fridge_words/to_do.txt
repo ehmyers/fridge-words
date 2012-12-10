@@ -1,15 +1,11 @@
 - enable oulipo's constraint!
 
-- make n/d flicker randomly
-
 - have a set number of each pos on fridge at a time
 
 - add more words to dictionary
 
 - make cross-browser compatible
 
-- revisit criteria for project
-
 - add emotional attachment to each word/
-	detect neg/pos emotion sentences/
+	detect neg/pos emotion groups/
 	change background based on that
