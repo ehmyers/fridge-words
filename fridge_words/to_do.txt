@@ -1,11 +1,13 @@
-- enable oulipo's constraint!
+- make pos loop
 
-- have a set number of each pos on fridge at a time
+- fix overlapping magnet problem
+
+- have a set number of each pos on fridge at a time?
 
 - add more words to dictionary
 
 - make cross-browser compatible
 
-- add emotional attachment to each word/
+- set up AFINN in conjunction/
 	detect neg/pos emotion groups/
 	change background based on that

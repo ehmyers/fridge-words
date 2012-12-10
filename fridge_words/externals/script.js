@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var numDivs = 1;
+	var numDivs = 15;
 	var highestIndex = 0;
 	var currentIndex = 0;
 	window.relativeX = 0;
