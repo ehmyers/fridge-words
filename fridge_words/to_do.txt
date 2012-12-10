@@ -2,6 +2,8 @@
 
 - make n/d flicker randomly
 
+- have a set number of each pos on fridge at a time
+
 - add more words to dictionary
 
 - make cross-browser compatible
