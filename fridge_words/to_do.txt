@@ -1,6 +1,4 @@
-- make pos loop
-
-- fix overlapping magnet problem
+- example in html or splash page
 
 - have a set number of each pos on fridge at a time?
 

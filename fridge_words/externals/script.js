@@ -4,43 +4,11 @@ $(document).ready(function() {
 	var currentIndex = 0;
 	window.relativeX = 0;
 	window.relativeY = 0;
-	var fridge = true;
 
 	var words = [];
 	$.getJSON("externals/words.json", function(data) {
 		words = data.words;
 		//console.log("The length of data is " + data.words.length);
-
-		// oulipo's n+7 constraint, still working on
-		setInterval(function() {
-			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
-			var randWord = $(randMag).children().html();
-			var oldWordIndex;
-			var randWordPos;
-			// finds the word within the json file
-			for (var i=0; i<words.length; i++) {
-				if (randWord == words[i].word) {
-					randWordPos = words[i].pos;
-					oldWordIndex = i;
-					break;
-				}
-			}
-			// searches all other pos for matches
-			var posCounter = 7;
-			var newWord;
-			for (var i=oldWordIndex; i<words.length; i++) {
-				if (randWordPos == words[i].pos) {
-					posCounter--;
-				}
-				if (posCounter == 0) {
-					newWord = words[i].word;
-					break;
-				}
-			}
-			// switches out randWord with newWord
-			$(randMag).html("<span>" + newWord + "</span>");
-			console.log(randWord + " -> " + newWord);
-		}, Math.random()*13000 + 2000);
 
 		// fri[d/n]ge words swap
 		setInterval(function() {
@@ -51,8 +19,16 @@ $(document).ready(function() {
 		}, 5500); // <- 5.5 seconds
 
 		// creating the individual magnets
+		var generatedIndexes = [];
 		for (var i = 0; i < numDivs; i++) {
+			// getting the index
 			var randIndex = Math.floor(Math.random()*words.length);
+			while (generatedIndexes.contains(randIndex)) {
+				randIndex = Math.floor(Math.random()*words.length);
+			}
+			generatedIndexes.push(randIndex); // adds to the bucket, yo
+
+			// using the index, getting word
 			var word = words[randIndex].word;
 			var newMagnet = $("<div class='drag magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
 
@@ -94,6 +70,42 @@ $(document).ready(function() {
 			//console.log("dragging DISengaged!");
 		});
 	});
+
+	// oulipo's n+7 constraint, still working on
+		setInterval(function() {
+			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
+			var randWord = $(randMag).children().html();
+			var oldWordIndex;
+			var randWordPos;
+			// finds the word within the json file
+			for (var i=0; i<words.length; i++) {
+				if (randWord == words[i].word) {
+					randWordPos = words[i].pos;
+					oldWordIndex = i;
+					break;
+				}
+			}
+			// searches all other pos for matches
+			var posCounter = 7;
+			var newWord;
+			console.log(words.length);
+			for (var i=oldWordIndex; true; i++) {
+				// loops around to beginning
+				if (i == words.length) {
+					i = 0;
+				}
+				if (randWordPos == words[i].pos) {
+					posCounter--;
+				}
+				if (posCounter == 0) {
+					newWord = words[i].word;
+					break;
+				}
+			}
+			// switches out randWord with newWord
+			$(randMag).html("<span>" + newWord + "</span>");
+			console.log(randWord + " -> " + newWord);
+		}, 2000);
 });
 
 // actually moving the magnets
