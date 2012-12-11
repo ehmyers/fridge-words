@@ -4,6 +4,7 @@ $(document).ready(function() {
 	var currentIndex = 0;
 	window.relativeX = 0;
 	window.relativeY = 0;
+	window.generatedIndexes = [];
 
 	var words = [];
 	$.getJSON("externals/words.json", function(data) {
@@ -12,38 +13,47 @@ $(document).ready(function() {
 		fridgeSwap();
 		
 		// creating magnets
-		var generatedIndexes = [];
 		var randIndex = Math.floor(Math.random()*words.length);
 		for (var i = 0; i < numDivs; i++) {
-			createFirstMagnets(i, words, generatedIndexes, randIndex);
-			checkingIndexes(words, generatedIndexes, randIndex);
-			gettingWord(words, randIndex);
-			randomPlacement();
-			randomAngle();
+			if (i <= 2) { // 
+				if (i == 0) { // creates three magnets at once
+					createFirstMagnets(words, randIndex);
+				}
+			}
+			else {
+				makeMagnet(words, randIndex);
+			}
 		}
 
 		// adding class on mousedown, etc
 		$(".magnet").mousedown(function(e) {
-			offsetDragging();
-			clickedToTop();
+			var offset = $(this).offset();
+			window.relativeX = (e.pageX - offset.left);
+			window.relativeY = (e.pageY - offset.top);
+			$(this).addClass("dragging");
+			// making the clicked magnet come to the top
+			var currentIndex = parseInt($(this).css("z-index"));
+			if (highestIndex > currentIndex) {
+				currentIndex = highestIndex + 1;
+			}
+			$(this).css("z-index", currentIndex);
+			highestIndex++;
 		});
 		// removing the class on mouseup
 		$("*").mouseup(function() {
 			$(".magnet").removeClass("dragging");
-			//console.log("dragging DISengaged!");
 		});
 	});
 
 	// oulipo's n+7 constraint
-	setInterval(function() {
-			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
-			var randWord = $(randMag).children().html();
-			var oldWordIndex;
-			var randWordPos;
-			findWord(words, randWord, oldWordIndex, randWordPos);
-			searchWord(words, oldWordIndex, randWordPos);
-			switchWord();
-	}, Math.random()*10000 + 2000);
+	// setInterval(function() {
+	// 		var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
+	// 		var randWord = $(randMag).children().html();
+	// 		var randWordPos;
+	// 		var oldWordIndex = findWord(words, randWord, randWordPos);
+	// 		searchWord(words, oldWordIndex, randWordPos);
+	// 		switchWord();
+	// }, Math.random()*10000 + 2000);
 });
 
 function fridgeSwap() {
@@ -56,54 +66,82 @@ function fridgeSwap() {
 	}, 5500); // <- 5.5 seconds
 }
 
-function createFirstMagnets(i, words, generatedIndexes, randIndex) {
-	// manually place first magnets
-	if (i == 0) {
-		var randIndexIntro = Math.floor(Math.random()*words.length);
-		var randWord = words[randIndexIntro];
-		firstWords(noun, 100, 100);
-		firstWords(verb, 150, 100);
-		firstWords(noun, 200, 100);
-		// randomizing the angle of the magnet
-		var randAngle = Math.floor(Math.random()*10-5);
-		newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
-		// adding new magnet to screen and bucket
-		$(".testdiv").append(newMagnet);
-		generatedIndexes.push(randIndex);
-		console.log(randWord.word);
-	}
+function createFirstMagnets(words, randIndex) {
+	// creates the noun of the sample sentence
+	var randIndexIntro = getRandIndexPos(words, "noun");
+	var newMagnet1 = makeNewMagnetDiv(words, randIndexIntro);
+	newMagnet1.offset({"top": 100, "left": 100});
+	randomAngle(newMagnet1);
+	$(".testdiv").append(newMagnet1);
+	window.generatedIndexes.push(randIndexIntro);
+
+	// creates the verb of the sample sentence
+	var randIndexIntro = getRandIndexPos(words, "verb");
+	var newMagnet2 = makeNewMagnetDiv(words, randIndexIntro);
+	newMagnet2.offset({"top": 135, "left": 95});
+	randomAngle(newMagnet2);
+	$(".testdiv").append(newMagnet2);
+	window.generatedIndexes.push(randIndexIntro);
+
+	// creates the second noun of the sample sentence
+	var randIndexIntro = getRandIndexPos(words, "noun");
+	var newMagnet3 = makeNewMagnetDiv(words, randIndexIntro);
+	newMagnet3.offset({"top": 170, "left": 100});
+	randomAngle(newMagnet3);
+	$(".testdiv").append(newMagnet3);
+	window.generatedIndexes.push(randIndexIntro);
 }
 
-function firstWords(pos, topPlacement, leftPlacement) {
+function getRandIndexPos(words, pos) { // with part of speech
+	var randIndexIntro = Math.floor(Math.random()*words.length);
+	var randWord = words[randIndexIntro];
 	while (randWord.pos != pos) {
 		randIndexIntro = Math.floor(Math.random()*words.length);
 		randWord = words[randIndexIntro];
 	}
-	var newMagnet = $("<div class='drag magnet' data-index='" + randIndexIntro + "'><span>" + randWord.word + "</span></div>");
-	newMagnet.offset({"top": topPlacement, "left": leftPlacement});
+	return randIndexIntro;
 }
 
-function checkingIndexes(words, generatedIndexes, randIndex) {
-	// getting the index
-	while ($.inArray(randIndex, generatedIndexes) != -1) { //generatedIndexes.contains(randIndex)
+function getRandIndex(words) { // without part of speech
+	var randIndex = Math.floor(Math.random()*words.length);
+	while ($.inArray(randIndex, window.generatedIndexes) != -1) {
 		randIndex = Math.floor(Math.random()*words.length);
 	}
-	generatedIndexes.push(randIndex); // adds to the bucket, yo
+	window.generatedIndexes.push(randIndex); // adds to the bucket, yo
+	return randIndex;
 }
 
-function gettingWord(words, randIndex) {
+function makeNewMagnetDiv(words, randIndexIntro) {
+	var word = words[randIndexIntro].word;
+	return $("<div class='drag magnet' data-index='" + randIndexIntro + "'><span>" + word + "</span></div>");
+}
+
+function makeMagnet(words, randIndex) {
 	// using the index, getting word
-	var word = words[randIndex].word;
-	var newMagnet = $("<div class='drag magnet' data-index='" + randIndex + "'><span>" + word + "</span></div>");
+	// checkIndexes(words, randIndex);
+	var randIndexIntro = getRandIndex(words, "noun");
+	var newMagnet = makeNewMagnetDiv(words, randIndexIntro);
+	randomPlacement(newMagnet);
+	randomAngle(newMagnet);
+	$(".testdiv").append(newMagnet);
+	window.generatedIndexes.push(randIndexIntro);
+}
+
+function checkIndexes(words, randIndex) {
+	// getting the index
+	while ($.inArray(randIndex, window.generatedIndexes) != -1) {
+		randIndex = Math.floor(Math.random()*words.length);
+	}
+	window.generatedIndexes.push(randIndex); // adds to the bucket, yo
 }
 
 function randomPlacement(newMagnet) {
 	// randomizing the placement of the magnets
 	var browserWidth = $(window).width();
 	var browserHeight = $(window).height();
-	var randomX = Math.floor(Math.random()*(browserHeight-200) + 100);
-	var randomY = Math.floor(Math.random()*(browserWidth-140) + 20);
-	newMagnet.offset({"top": randomX, "left": randomY});
+	var randomX = Math.floor(Math.random()*(browserWidth-290) + 200);
+	var randomY = Math.floor(Math.random()*(browserHeight-200) + 100);
+	newMagnet.offset({"top": randomY, "left": randomX});
 	$(".testdiv").append(newMagnet);
 }
 
@@ -113,37 +151,17 @@ function randomAngle(newMagnet) {
 	newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
 }
 
-function offsetDragging() {
-	var offset = $(this).offset();
-	window.relativeX = (e.pageX - offset.left);
-	window.relativeY = (e.pageY - offset.top);
-	$(this).addClass("dragging");
-	//console.log("dragging engaged!");
-}
-
-function clickedToTop() {
-	// making the clicked magnet come to the top
-	var currentIndex = parseInt($(this).css("z-index"));
-	//console.log("This is the current index " + currentIndex);
-	if (highestIndex > currentIndex) {
-		currentIndex = highestIndex + 1;
-	}
-	$(this).css("z-index", currentIndex);
-	highestIndex++;
-	//console.log("This is the highest index " + highestIndex);
-}
-
 // actually moving the magnets
 $("*").mousemove(function(e) {
 	$(".dragging").css({'top':e.pageY - relativeY,'left':e.pageX - relativeX});
 });
 
-function findWord(words, randWord, oldWordIndex, randWordPos) {
+function findWord(words, randWord, randWordPos) {
 	// finds the word within the json file
 	for (var i=0; i<words.length; i++) {
 		if (randWord == words[i].word) {
 			randWordPos = words[i].pos;
-			oldWordIndex = i;
+			return i;
 			break;
 		}
 	}
@@ -153,6 +171,7 @@ function searchWord(words, oldWordIndex, randWordPos) {
 	// searches all other pos for matches
 	var posCounter = 7;
 	var newWord;
+	console.log(oldWordIndex);
 	for (var i=oldWordIndex; true; i++) {
 		// loops around to beginning
 		if (i == words.length) {

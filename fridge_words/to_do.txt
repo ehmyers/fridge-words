@@ -1,5 +1,3 @@
-- example in html or splash page?
-
 - add more words to dictionary
 
 - set up AFINN in conjunction/
