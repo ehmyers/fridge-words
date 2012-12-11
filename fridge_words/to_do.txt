@@ -1,10 +1,6 @@
-- example in html or splash page
-
-- have a set number of each pos on fridge at a time?
+- example in html or splash page?
 
 - add more words to dictionary
-
-- make cross-browser compatible
 
 - set up AFINN in conjunction/
 	detect neg/pos emotion groups/

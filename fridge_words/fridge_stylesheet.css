@@ -1,5 +1,3 @@
-/**************** general *******************/
-
 body {
 	background: url("images/pattern_03.png");
 	background-repeat: repeat;
@@ -28,28 +26,21 @@ h1 {
 	padding-left: 10px;
 }
 
+.lightbox {
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background: rgba(0,0,0, 0.4);
+	padding-top: 100px;
+	padding-left: 150px;
+	font-size: 30px;
+	color: #ffffff;
+}
+
 .magnet span {
 	background: white;
 	padding: 5px;
 	box-shadow: 2px 2px 3px #888888;
-}
-
-/********** swapping backgrounds **************/
-
-div.background {
-	position:absolute;
-	left:0px;
-	top:0px;
-	z-index:-1;
-}
-
-div.background img {
-	position:fixed;
-	list-style: none;
-	left:0px;
-	top:0px;
-}
-
-div.background ul li.show {
-	z-index:500
 }

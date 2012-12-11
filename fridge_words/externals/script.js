@@ -21,9 +21,30 @@ $(document).ready(function() {
 		// creating the individual magnets
 		var generatedIndexes = [];
 		for (var i = 0; i < numDivs; i++) {
+			// manually place first magnets
+			if (i == 0) {
+				var randIndexIntro = Math.floor(Math.random()*words.length);
+				var randWord = words[randIndexIntro];
+				while (randWord.pos != "noun") {
+					randIndexIntro = Math.floor(Math.random()*words.length);
+					randWord = words[randIndexIntro];
+				}
+
+				var newMagnet = $("<div class='drag magnet' data-index='" + randIndexIntro + "'><span>" + randWord.word + "</span></div>");
+				newMagnet.offset({"top": 100, "left": 100});
+				// randomizing the angle of the magnet
+				var randAngle = Math.floor(Math.random()*10-5);
+				newMagnet.css("-moz-transform", "rotate(" + randAngle + "deg)");
+				// adding new magnet to screen and bucket
+				$(".testdiv").append(newMagnet);
+				generatedIndexes.push(randIndex);
+				console.log(randWord.word);
+
+			}
+
 			// getting the index
 			var randIndex = Math.floor(Math.random()*words.length);
-			while (generatedIndexes.contains(randIndex)) {
+			while ($.inArray(randIndex, generatedIndexes) != -1) { //generatedIndexes.contains(randIndex)
 				randIndex = Math.floor(Math.random()*words.length);
 			}
 			generatedIndexes.push(randIndex); // adds to the bucket, yo
@@ -88,7 +109,6 @@ $(document).ready(function() {
 			// searches all other pos for matches
 			var posCounter = 7;
 			var newWord;
-			console.log(words.length);
 			for (var i=oldWordIndex; true; i++) {
 				// loops around to beginning
 				if (i == words.length) {
@@ -105,10 +125,15 @@ $(document).ready(function() {
 			// switches out randWord with newWord
 			$(randMag).html("<span>" + newWord + "</span>");
 			console.log(randWord + " -> " + newWord);
-		}, 2000);
+		}, Math.random()*10000 + 2000);
 });
 
 // actually moving the magnets
 $("*").mousemove(function(e) {
 	$(".dragging").css({'top':e.pageY - relativeY,'left':e.pageX - relativeX});
 });
+
+// // lightbox code for intro
+// function closeLightbox() {
+// 	$('.lightbox').fadeOut();
+// }
