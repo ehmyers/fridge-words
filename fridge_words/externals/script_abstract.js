@@ -46,14 +46,15 @@ $(document).ready(function() {
 	});
 
 	// oulipo's n+7 constraint
-	// setInterval(function() {
-	// 		var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
-	// 		var randWord = $(randMag).children().html();
-	// 		var randWordPos;
-	// 		var oldWordIndex = findWord(words, randWord, randWordPos);
-	// 		searchWord(words, oldWordIndex, randWordPos);
-	// 		switchWord();
-	// }, Math.random()*10000 + 2000);
+	setInterval(function() {
+			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
+			var randWord = $(randMag).children().html();
+			var oldWordIndex = findWord(words, randWord);
+			var oldWordPos = findWordPos(words, randWord);
+			var newWord = searchWord(words, oldWordIndex, oldWordPos);
+			$(randMag).html("<span>" + newWord + "</span>");
+			console.log(randWord + " -> " + newWord);
+	}, Math.random()*10000 + 2000);
 });
 
 function fridgeSwap() {
@@ -156,39 +157,40 @@ $("*").mousemove(function(e) {
 	$(".dragging").css({'top':e.pageY - relativeY,'left':e.pageX - relativeX});
 });
 
-function findWord(words, randWord, randWordPos) {
+function findWord(words, randWord) {
 	// finds the word within the json file
-	for (var i=0; i<words.length; i++) {
+	for (var i = 0; i < words.length; i++) {
 		if (randWord == words[i].word) {
-			randWordPos = words[i].pos;
 			return i;
 			break;
 		}
 	}
 }
 
-function searchWord(words, oldWordIndex, randWordPos) {
-	// searches all other pos for matches
-	var posCounter = 7;
-	var newWord;
-	console.log(oldWordIndex);
-	for (var i=oldWordIndex; true; i++) {
-		// loops around to beginning
-		if (i == words.length) {
-			i = 0;
-		}
-		if (randWordPos == words[i].pos) {
-			posCounter--;
-		}
-		if (posCounter == 0) {
-			newWord = words[i].word;
+function findWordPos(words, randWord) {
+	for (var i = 0; i < words.length; i++) {
+		if (randWord == words[i].word) {
+			return words[i].pos;
 			break;
 		}
 	}
 }
 
-function switchWord() {
-	// switches out randWord with newWord
-	$(randMag).html("<span>" + newWord + "</span>");
-	console.log(randWord + " -> " + newWord);
+function searchWord(words, oldWordIndex, oldWordPos) {
+	// searches all other pos for matches
+	var posCounter = 7;
+	var newWord;
+	for (var i = oldWordIndex; true; i++) {
+		// loops around to beginning
+		if (i == words.length) {
+			i = 0;
+		}
+		if (oldWordPos == words[i].pos) {
+			posCounter--;
+		}
+		if (posCounter == 0) {
+			return words[i].word;
+			break;
+		}
+	}
 }
