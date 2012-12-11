@@ -29,7 +29,7 @@ $(document).ready(function() {
 					randIndexIntro = Math.floor(Math.random()*words.length);
 					randWord = words[randIndexIntro];
 				}
-
+				
 				var newMagnet = $("<div class='drag magnet' data-index='" + randIndexIntro + "'><span>" + randWord.word + "</span></div>");
 				newMagnet.offset({"top": 100, "left": 100});
 				// randomizing the angle of the magnet
@@ -92,7 +92,7 @@ $(document).ready(function() {
 		});
 	});
 
-	// oulipo's n+7 constraint, still working on
+	// oulipo's n+7 constraint
 		setInterval(function() {
 			var randMag = $(".magnet")[Math.floor(Math.random()*numDivs)];
 			var randWord = $(randMag).children().html();
