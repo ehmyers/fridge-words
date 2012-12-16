@@ -1,5 +1,0 @@
-- add more words to dictionary
-
-- set up AFINN in conjunction/
-	detect neg/pos emotion groups/
-	change background based on that
