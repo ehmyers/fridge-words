@@ -1,4 +1,4 @@
-{"words": [
+window.words = {"words": [
 	{"word": ".", "pos": "punctuation"},
 	{"word": "!", "pos": "punctuation"},
 	{"word": "!!!", "pos": "punctuation"},
@@ -167,4 +167,4 @@
 	{"word": "yellow", "pos": "adjective"},
 	{"word": "your", "pos": "pronoun"},
 	{"word": "zombies", "pos": "noun"}
-]}
+]};
