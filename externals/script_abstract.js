@@ -39,12 +39,14 @@ function randomAngle(newMagnet) {
 
 function createFirstMagnets(words, randIndex) {
     "use strict";
-    // creates the noun of the sample sentence
-    var randIndexIntro = getRandIndexPos(words, "noun"),
-        newMagnet1 = makeNewMagnetDiv(words, randIndexIntro),
-        newMagnet2 = makeNewMagnetDiv(words, randIndexIntro),
-        newMagnet3 = makeNewMagnetDiv(words, randIndexIntro);
+    var randIndexIntro,
+        newMagnet1,
+        newMagnet2,
+        newMagnet3;
 
+    // creates the noun of the sample sentence
+    randIndexIntro = getRandIndexPos(words, "noun");
+    newMagnet1 = makeNewMagnetDiv(words, randIndexIntro);
     newMagnet1.offset({"top": 100, "left": 100});
     randomAngle(newMagnet1);
     $(".testdiv").append(newMagnet1);
@@ -52,6 +54,7 @@ function createFirstMagnets(words, randIndex) {
 
     // creates the verb of the sample sentence
     randIndexIntro = getRandIndexPos(words, "verb");
+    newMagnet2 = makeNewMagnetDiv(words, randIndexIntro);
     newMagnet2.offset({"top": 135, "left": 95});
     randomAngle(newMagnet2);
     $(".testdiv").append(newMagnet2);
@@ -59,6 +62,7 @@ function createFirstMagnets(words, randIndex) {
 
     // creates the second noun of the sample sentence
     randIndexIntro = getRandIndexPos(words, "noun");
+    newMagnet3 = makeNewMagnetDiv(words, randIndexIntro);
     newMagnet3.offset({"top": 170, "left": 100});
     randomAngle(newMagnet3);
     $(".testdiv").append(newMagnet3);
